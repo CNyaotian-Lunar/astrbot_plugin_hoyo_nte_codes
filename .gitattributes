@@ -1,0 +1,27 @@
+# 统一换行符：Windows 编辑、Linux 运行，锁死 LF。
+# 为什么：core.autocrlf 在不同机器上取值不同，没有这条会让同一次提交在不同机器上 checkout 出不同字节。
+* text=auto eol=lf
+*.sh   text eol=lf
+*.py   text eol=lf
+*.mjs  text eol=lf
+*.js   text eol=lf
+*.json text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+*.md   text eol=lf
+*.txt  text eol=lf
+*.svg  text eol=lf
+
+# 二进制：禁止任何转换
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.exe binary
+*.zip binary
+*.gz binary
+*.tgz binary
+*.woff binary
+*.woff2 binary

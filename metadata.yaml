@@ -1,0 +1,6 @@
+name: astrbot_plugin_hoyo_nte_codes
+display_name: 前瞻兑换码
+desc: 原神 / 崩坏：星穹铁道 / 绝区零 / 崩坏3 / 异环 国服前瞻直播兑换码查询，并在发现新码时自动推送到订阅的会话（异环走 TapTap 社区源）。
+version: 1.3.0
+author: whale
+repo: https://github.com/CNyaotian-Lunar/astrbot_plugin_hoyo_nte_codes

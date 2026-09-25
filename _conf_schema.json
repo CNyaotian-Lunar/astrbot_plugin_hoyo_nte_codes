@@ -1,0 +1,148 @@
+{
+  "watch_authors_per_game": {
+    "description": "每个游戏盯几位「兑换码作者」（备用源）",
+    "type": "int",
+    "default": 2,
+    "hint": "插件会自动从搜索结果里学习「谁在发兑换码」，之后直接盯他们的主页（绕开关键词搜索）。填 0 = 关闭盯人。"
+  },
+  "enable_miyolive": {
+    "description": "启用官方 miyolive 直播活动源（目前只有原神有效）",
+    "type": "bool",
+    "default": true,
+    "hint": "官方活动接口，最权威；但实测星铁/绝区零的官方前瞻帖都不带 act_id，只有原神能取到码。"
+  },
+  "push_as_forward": {
+    "description": "用「合并转发」推送（推荐开）",
+    "type": "bool",
+    "default": true,
+    "hint": "开启后推送是一张聊天记录卡片：标题一条、**每个兑换码单独一条**、来源一条 —— 方便在 QQ 里长按单个码复制到游戏中粘贴。失败会自动降级成普通文本。"
+  },
+  "forward_bot_name": {
+    "description": "合并转发卡片上显示的昵称",
+    "type": "string",
+    "default": "兑换码播报",
+    "hint": "拿不到机器人自身昵称时用这个。"
+  },
+  "forward_bot_uin": {
+    "description": "合并转发卡片上显示的 QQ 号",
+    "type": "string",
+    "default": "",
+    "hint": "留空 = 自动从平台获取机器人自己的 QQ 号（推荐留空）。"
+  },
+  "notify_live": {
+    "description": "推送「前瞻直播提醒」",
+    "type": "bool",
+    "default": true,
+    "hint": "临近开播时给订阅的会话发一条提醒（含 B站直播间链接）—— 每个前瞻事件只发一条，不会刷屏。"
+  },
+  "enable_act_id_probe": {
+    "description": "前瞻当晚探测星铁/绝区零是否出现米游社官方活动",
+    "type": "bool",
+    "default": true,
+    "hint": "这两个游戏的官方从来没挂过 miyolive 活动链接，正常取码只能靠社区帖。开启后会在「官方 B站直播间正在直播 / 标题变了」时额外搜 1 次 act_id —— 万一官方哪天开了米游社直播间，就能自动吃到官方码。零副作用（判不到就什么都不做，每场前瞻最多几次请求）。"
+  },
+  "live_notice_minutes": {
+    "description": "提前多久提醒「前瞻要开播了」（分钟）",
+    "type": "int",
+    "default": 60,
+    "hint": "进入这个窗口后才提醒。配合下面的「动态轮询」使用：进入窗口就会加密轮询，提醒会准点发出。"
+  },
+  "live_fast_window_minutes": {
+    "description": "动态轮询：距离开播多久开始加密（分钟）",
+    "type": "int",
+    "default": 60,
+    "hint": "只要某个游戏的**已知开播时间**在这个窗口内，下一次轮询就缩短到下面的「加密间隔」—— 让提醒准点发出，而不是在 0~60 分钟之间随机时刻冒出来。默认 60（提前 1 小时开始盯）。"
+  },
+  "live_fast_poll_minutes": {
+    "description": "动态轮询：加密时的检查间隔（分钟）",
+    "type": "int",
+    "default": 5,
+    "hint": "临近开播时改成这个间隔。提醒一发出就自动恢复正常间隔（不会一直高频查）。默认 5 分钟。"
+  },
+  "show_expired_codes": {
+    "description": "查询结果里是否列出已过期的码",
+    "type": "bool",
+    "default": false,
+    "hint": "关闭（默认）时查询只显示还能用的码，明确已过期的连「另有 N 个已过期」都不列 —— 复制了也没用。想核对旧码时打开它。"
+  },
+  "bili_live_rooms": {
+    "description": "各游戏官方 B站直播间 room_id（兜底用）",
+    "type": "dict",
+    "items": {},
+    "default": {
+      "genshin": "21987615",
+      "starrail": "27263119",
+      "zzz": "32805602",
+      "hi3": "1319882",
+      "nte": "1890951177"
+    },
+    "hint": "官方帖里能提到直播间链接时优先用帖子里的；提不到就用这里的。这五个是实测到的官方前瞻常设直播间（它们的标题就写着《XX》X.X版本前瞻特别节目）。⚠️ 异环（nte=1890951177）在 2026-09-16 之前漏配过，导致它的前瞻提醒整行没有直播间链接。"
+  },
+  "check_interval_minutes": {
+    "description": "检查间隔（分钟）",
+    "type": "int",
+    "default": 60,
+    "hint": "每隔多久去米游社检查一次新兑换码。前瞻直播多在晚上，60 分钟足够灵敏；调太小可能触发米游社风控。"
+  },
+  "startup_delay_seconds": {
+    "description": "启动后延迟多久开始第一次检查（秒）",
+    "type": "int",
+    "default": 90,
+    "hint": "避免与 AstrBot 启动抢资源 / 重启风暴。"
+  },
+  "retention_days": {
+    "description": "已记录兑换码的保留天数",
+    "type": "int",
+    "default": 180,
+    "hint": "超过这个天数没再出现的码会被清理；清理时会留一个指纹墓碑，旧码日后重现不会被误报成新码。填 0 = 永久保留。"
+  },
+  "post_max_age_days": {
+    "description": "只看最近多少天内的米游社帖子",
+    "type": "int",
+    "default": 7,
+    "hint": "前瞻兑换码通常 1~2 天失效。实测搜索会返回多个历史版本的帖子（2.7/2.8/3.0…），窗口开太大会把过期旧码也抓进来。"
+  },
+  "max_posts_per_game": {
+    "description": "每个游戏每轮最多读取几篇帖子",
+    "type": "int",
+    "default": 4,
+    "hint": "读得越多交叉验证越强，但请求也越多。"
+  },
+  "min_cn_group": {
+    "description": "中文码最少成组数量",
+    "type": "int",
+    "default": 2,
+    "hint": "中文候选必须连续成组出现，少于这个数就丢弃，可以挡掉「有效期至明日」这类孤零零的说明文字。填 1 = 关闭这条规则。"
+  },
+  "push_tiers": {
+    "description": "只推送哪些可信档位",
+    "type": "list",
+    "default": ["A", "B"],
+    "options": ["A", "B"],
+    "hint": "A = 有 ≥2 位不同作者发布（实测零误报，最可信）；B = 单作者但标题带版本号且同帖有多个候选（实测也零误报）。只填 A 最稳，但新码刚出现时要等第二位作者发帖。"
+  },
+  "enabled_games": {
+    "description": "启用哪些游戏",
+    "type": "list",
+    "default": ["genshin", "starrail", "zzz", "hi3", "nte"],
+    "options": ["genshin", "starrail", "zzz", "hi3", "nte"],
+    "hint": "genshin=原神，starrail=崩坏：星穹铁道，zzz=绝区零，hi3=崩坏3，nte=异环（TapTap 社区源）。"
+  },
+  "push_targets": {
+    "description": "固定推送目标（unified_msg_origin 字符串列表）",
+    "type": "list",
+    "default": [],
+    "hint": "一般不用填：直接在目标群里发「/订阅兑换码」即可。这里用于强制指定。"
+  },
+  "request_interval_seconds": {
+    "description": "米游社请求最小间隔（秒）",
+    "type": "float",
+    "default": 1.2,
+    "hint": "限速用，别调太小，容易被风控。"
+  },
+  "notify_on_empty_subscribers": {
+    "description": "没有订阅者时是否写日志提醒",
+    "type": "bool",
+    "default": false
+  }
+}
