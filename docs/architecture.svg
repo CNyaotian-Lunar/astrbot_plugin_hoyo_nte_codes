@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="880" viewBox="0 0 1240 880" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif">
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#58a6ff"/>
+    </marker>
+    <marker id="arw2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8b949e"/>
+    </marker>
+  </defs>
+  <rect width="1240" height="880" fill="#0d1117"/>
+
+  <text x="48" y="58" font-size="27" font-weight="600" fill="#e6edf3">前瞻兑换码插件 · 数据流</text>
+  <text x="48" y="86" font-size="13.5" fill="#8b949e">米哈游系（原神 / 星铁 / 绝区零 / 崩坏3）+ 异环（NTE）· 只做查询与推送，不涉及账号登录、代领取或交易</text>
+  <line x1="48" y1="106" x2="1192" y2="106" stroke="#21262d"/>
+
+  <text x="48"  y="140" font-size="14" font-weight="600" fill="#58a6ff" letter-spacing="1">数据源（三源 + 一个备用源）</text>
+  <text x="396" y="140" font-size="14" font-weight="600" fill="#58a6ff" letter-spacing="1">解析 · 去重 · 节流</text>
+  <text x="914" y="140" font-size="14" font-weight="600" fill="#58a6ff" letter-spacing="1">会话侧输出</text>
+
+  <g>
+    <rect x="48" y="158" width="300" height="88" rx="9" fill="#161b22" stroke="#30363d"/>
+    <text x="68" y="187" font-size="15.5" font-weight="600" fill="#e6edf3">米游社官方帖</text>
+    <text x="68" y="209" font-size="12.5" fill="#8b949e">原神 / 星铁 / 绝区零 / 崩坏3</text>
+    <text x="68" y="231" font-size="12.5" fill="#8b949e">按发布倒序，默认最多 4 篇 / 轮</text>
+
+    <rect x="48" y="258" width="300" height="88" rx="9" fill="#161b22" stroke="#30363d"/>
+    <text x="68" y="287" font-size="15.5" font-weight="600" fill="#e6edf3">官方 miyolive 活动源</text>
+    <text x="68" y="309" font-size="12.5" fill="#8b949e">目前对原神有效</text>
+    <text x="68" y="331" font-size="12.5" fill="#8b949e">enable_miyolive</text>
+
+    <rect x="48" y="358" width="300" height="88" rx="9" fill="#161b22" stroke="#30363d"/>
+    <text x="68" y="387" font-size="15.5" font-weight="600" fill="#e6edf3">TapTap 社区</text>
+    <text x="68" y="409" font-size="12.5" fill="#8b949e">异环（NTE）的兑换码帖</text>
+    <text x="68" y="431" font-size="12.5" fill="#8b949e">异环不是米哈游的 ⇒ 插件名带 nte</text>
+
+    <rect x="48" y="458" width="300" height="88" rx="9" fill="#161b22" stroke="#30363d" stroke-dasharray="5 4"/>
+    <text x="68" y="487" font-size="15.5" font-weight="600" fill="#e6edf3">「兑换码作者」备用源</text>
+    <text x="68" y="509" font-size="12.5" fill="#8b949e">每个游戏盯 N 位作者的帖子</text>
+    <text x="68" y="531" font-size="12.5" fill="#8b949e">watch_authors_per_game（默认 2 位）</text>
+  </g>
+  <line x1="348" y1="322" x2="392" y2="322" stroke="#58a6ff" stroke-width="2" marker-end="url(#arw)"/>
+  <line x1="866" y1="322" x2="910" y2="322" stroke="#8b949e" stroke-width="1.6" marker-end="url(#arw2)"/>
+
+  <g>
+    <rect x="396" y="158" width="470" height="72" rx="9" fill="#161b22" stroke="#30363d"/>
+    <text x="416" y="186" font-size="15" font-weight="600" fill="#e6edf3">hoyo_core.py · 米哈游系解析核心</text>
+    <text x="416" y="208" font-size="12.5" fill="#8b949e">兑换码提取 + 可信档位判定（A / B），selftest_core.py 覆盖</text>
+
+    <rect x="396" y="242" width="470" height="72" rx="9" fill="#161b22" stroke="#30363d"/>
+    <text x="416" y="270" font-size="15" font-weight="600" fill="#e6edf3">nte_core.py · 异环解析</text>
+    <text x="416" y="292" font-size="12.5" fill="#8b949e">TapTap 源的解析口径，selftest_nte.py 覆盖</text>
+
+    <rect x="396" y="326" width="470" height="72" rx="9" fill="#161b22" stroke="#30363d"/>
+    <text x="416" y="354" font-size="15" font-weight="600" fill="#e6edf3">去重账本</text>
+    <text x="416" y="376" font-size="12.5" fill="#8b949e">已记录的码保留 180 天（retention_days）；同一码只推一次</text>
+
+    <rect x="396" y="410" width="470" height="72" rx="9" fill="#161b22" stroke="#30363d"/>
+    <text x="416" y="438" font-size="15" font-weight="600" fill="#e6edf3">防误判与节流</text>
+    <text x="416" y="460" font-size="12.5" fill="#8b949e">中文码最少成组 2 个；请求最小间隔 1.2 秒（别把别人的站打疼）</text>
+
+    <rect x="396" y="494" width="470" height="72" rx="9" fill="#161b22" stroke="#30363d" stroke-dasharray="5 4"/>
+    <text x="416" y="522" font-size="15" font-weight="600" fill="#e6edf3">probe_*.mjs · 数据源探针</text>
+    <text x="416" y="544" font-size="12.5" fill="#8b949e">调研各源可用性时留下的；上游改版后用它快速定位</text>
+  </g>
+
+  <g>
+    <rect x="914" y="158" width="278" height="88" rx="9" fill="#161b22" stroke="#30363d"/>
+    <text x="934" y="187" font-size="15.5" font-weight="600" fill="#e6edf3">手动查询</text>
+    <text x="934" y="209" font-size="12.5" fill="#8b949e">列出各游戏当前有效兑换码</text>
+    <text x="934" y="231" font-size="12.5" fill="#58a6ff">兑换码 / codes</text>
+
+    <rect x="914" y="258" width="278" height="88" rx="9" fill="#161b22" stroke="#30363d"/>
+    <text x="934" y="287" font-size="15.5" font-weight="600" fill="#e6edf3">订阅推送</text>
+    <text x="934" y="309" font-size="12.5" fill="#8b949e">发现新码自动推到该会话</text>
+    <text x="934" y="331" font-size="12.5" fill="#58a6ff">订阅兑换码 / 退订兑换码</text>
+
+    <rect x="914" y="358" width="278" height="88" rx="9" fill="#161b22" stroke="#30363d"/>
+    <text x="934" y="387" font-size="15.5" font-weight="600" fill="#e6edf3">前瞻提醒</text>
+    <text x="934" y="409" font-size="12.5" fill="#8b949e">直播开播前 60 分钟提醒</text>
+    <text x="934" y="431" font-size="12.5" fill="#58a6ff">订阅前瞻 / 退订前瞻</text>
+
+    <rect x="914" y="458" width="278" height="88" rx="9" fill="#161b22" stroke="#30363d"/>
+    <text x="934" y="487" font-size="15.5" font-weight="600" fill="#e6edf3">状态与自检</text>
+    <text x="934" y="509" font-size="12.5" fill="#8b949e">订阅情况 / 最近检查 / 数据源连通性</text>
+    <text x="934" y="531" font-size="12.5" fill="#58a6ff">兑换码状态 / 兑换码自检</text>
+  </g>
+
+  <rect x="48" y="574" width="1144" height="266" rx="10" fill="#0f141b" stroke="#21262d"/>
+  <text x="72" y="608" font-size="14" font-weight="600" fill="#58a6ff" letter-spacing="1">设计取向</text>
+
+  <circle cx="80" cy="640" r="4" fill="#58a6ff"/>
+  <text x="96" y="645" font-size="13" fill="#c9d1d9">只做查询与推送 —— 不涉及任何账号登录、代领取或交易；兑换码有效性以游戏内实际与官方公告为准。</text>
+
+  <circle cx="80" cy="674" r="4" fill="#58a6ff"/>
+  <text x="96" y="679" font-size="13" fill="#c9d1d9">抓第三方站点保持合理间隔（默认 1.2 秒，请勿调到过小）—— 别人的站不该被我们打疼。</text>
+
+  <circle cx="80" cy="708" r="4" fill="#58a6ff"/>
+  <text x="96" y="713" font-size="13" fill="#c9d1d9">分档推送：只推可信档位（push_tiers 默认 A/B），中文码要求最少成组 2 个以防误判。</text>
+
+  <circle cx="80" cy="742" r="4" fill="#58a6ff"/>
+  <text x="96" y="747" font-size="13" fill="#c9d1d9">上游改版必然导致解析失效 —— 用「兑换码自检」定位，必要时用 probe_*.mjs 重新调研数据源。</text>
+
+  <circle cx="80" cy="776" r="4" fill="#58a6ff"/>
+  <text x="96" y="781" font-size="13" fill="#c9d1d9">三层自测：selftest_core（解析）/ selftest_plugin（命令与订阅流程）/ selftest_nte（异环解析）+ 采集冒烟。</text>
+</svg>

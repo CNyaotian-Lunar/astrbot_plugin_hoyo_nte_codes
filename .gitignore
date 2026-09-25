@@ -1,0 +1,15 @@
+# ---- 项目级本地仓 ----
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.bak
+*.bak-*
+*.log
+*.out
+tmp/
+logs/
+data/
+_trash/
+.DS_Store
+Thumbs.db
